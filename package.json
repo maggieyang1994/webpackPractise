@@ -41,6 +41,7 @@
     "webpack-parallel-uglify-plugin": "^1.1.1"
   },
   "dependencies": {
+    "husky": "^4.2.5",
     "jquery": "^3.4.1",
     "lodash": "^4.17.14",
     "opn": "^6.0.0",
