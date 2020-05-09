@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
-//  webpack-dev-middleware webpack-dev-middleware 实现webpack-dev-server -hot 功能
+//  webpack-dev-middleware webpack-hot-middleware 实现webpack-dev-server -hot 功能
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require("webpack-hot-middleware")
 
@@ -15,6 +15,7 @@ const app = express();
 
 const config = {
   mode: 'development',
+  //// 必须这么写，这将连接到服务器，以便在包重新构建时接收通知，然后相应地更新客户端
   entry:['webpack-hot-middleware/client?noInfo=true&reload=true', './src/index.js'],
   devtool: 'inline-source-map',
   devServer: {

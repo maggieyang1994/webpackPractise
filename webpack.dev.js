@@ -1,12 +1,14 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const webpack = require("webpack")
+const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
 module.exports = merge(common, {
   mode: 'development',
-    // 追踪源代码 错误的原始位置
+  // 追踪源代码 错误的原始位置
   devtool: 'inline-source-map',
-  
+
   // 使用webpack --watch  当webpack检测到文件改动的时候   自动编译  但是浏览器并不会自动刷新
   // 使用webpack-dev-server --open    当webpack检测到文件改动的时候  自动编译 
   // devServer 选项则是 将contentBase目录下的文件serve到localhost:port下
@@ -26,6 +28,20 @@ module.exports = merge(common, {
     new webpack.ProvidePlugin({
       '$': 'jquery',
       'jquery': 'jquery'
+    }),
+    new WebpackParallelUglifyPlugin({
+      uglifyJS: {
+        output: {
+          beautify: true, //不需要格式化
+          comments: true //不保留注释
+        },
+        compress: {
+          // warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
+          drop_console: false, // 删除所有的 `console` 语句，可以兼容ie浏览器
+          // collapse_vars: true, // 内嵌定义了但是只用到一次的变量
+          // reduce_vars: true // 提取出出现多次但是没有定义成变量去引用的静态值
+        }
+      }
     })
   ],
   resolve: {
@@ -44,5 +60,16 @@ module.exports = merge(common, {
       '.ts',
       '.tsx'
     ],
-  }
+  },
+  // optimization: {
+  //   minimizer: [new UglifyJsPlugin(
+  //     {
+  //       uglifyOptions: {
+  //         output: {
+  //           comments: false,
+  //         },
+  //       },
+  //     }
+  //   )],
+  // }
 });

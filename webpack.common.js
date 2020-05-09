@@ -22,7 +22,8 @@ module.exports = {
     new CleanWebpackPlugin(),
 
     new HtmlWebpackPlugin({
-      title: "cacheing"
+      title: "cacheing",
+      template: './public/index.html'
     })
     // 如果没有这个htmlwebpackPlugin  那么每次打包js之后  需要手动改动index.html
     // 这个插件用于自动生成打包之后的html
@@ -129,3 +130,11 @@ module.exports = {
 
 
 // // package.json 中的sideEffects: false代表webpack 可以安全的删除没有引用的export  缩小打包后的体积
+
+
+// "test": "echo \"Error: no test specified\" && exit 1",
+//     "watch": "webpack --watch --config webpack.dev.js", // 检测到文件改动会自动打包
+//     "start": "webpack-dev-server --open --config webpack.dev.js",
+//     "build": "webpack --config webpack.prod.js",
+//     "dev": "webpack --config webpack.dev.js", // 基本的打包命令
+//     "server": "node server.js" // 用webpack-dev-middleware webpack-hot-middleware是实现webpack-dev-server
