@@ -48,7 +48,7 @@
   "dependencies": {
     "husky": "^4.2.5",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "opn": "^6.0.0",
     "webpack-hot-middleware": "^2.25.0"
   }
